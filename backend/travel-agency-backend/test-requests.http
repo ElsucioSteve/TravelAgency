@@ -1,0 +1,13 @@
+### Create a new user
+POST http://localhost:8090/api/v1/users
+Content-Type: application/json
+
+{
+  "fullName": "Steve Elsucio",
+  "email": "steve.developer@example.com",
+  "addressStreet": "Av. Siempreviva",
+  "addressNumber": "742",
+  "district": "Springfield",
+  "userRole": "CLIENT",
+  "accountStatus": "ACTIVE"
+}

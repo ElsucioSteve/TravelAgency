@@ -1,0 +1,94 @@
+services:
+  # ===== FRONTEND (3 réplicas) =====
+  frontend1:
+    image: jordansgr/travel-agency-frontend:latest
+    networks:
+      - frontend-network
+
+  frontend2:
+    image: jordansgr/travel-agency-frontend:latest
+    networks:
+      - frontend-network
+
+  frontend3:
+    image: jordansgr/travel-agency-frontend:latest
+    networks:
+      - frontend-network
+
+  # ===== BACKEND (3 réplicas) =====
+  backend1:
+    image: jordansgr/travel-agency-backend:latest
+    extra_hosts:
+      - "ubuntu-host:host-gateway"
+    environment:
+      - DB_HOST=ubuntu-host
+      - DB_PORT=3306
+      - DB_NAME=travel_agency_db
+      - DB_USER=root
+      - DB_PASSWORD=070299.
+      - KEYCLOAK_URL=http://ubuntu-host:9090
+      - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI=http://ubuntu-host:9090/realms/sisgr-realm/protocol/openid-connect/certs
+    networks:
+      - backend-network
+
+  backend2:
+    image: jordansgr/travel-agency-backend:latest
+    extra_hosts:
+      - "ubuntu-host:host-gateway"
+    environment:
+      - DB_HOST=ubuntu-host
+      - DB_PORT=3306
+      - DB_NAME=travel_agency_db
+      - DB_USER=root
+      - DB_PASSWORD=070299.
+      - KEYCLOAK_URL=http://ubuntu-host:9090
+      - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI=http://ubuntu-host:9090/realms/sisgr-realm/protocol/openid-connect/certs
+    networks:
+      - backend-network
+
+  backend3:
+    image: jordansgr/travel-agency-backend:latest
+    extra_hosts:
+      - "ubuntu-host:host-gateway"
+    environment:
+      - DB_HOST=ubuntu-host
+      - DB_PORT=3306
+      - DB_NAME=travel_agency_db
+      - DB_USER=root
+      - DB_PASSWORD=070299.
+      - KEYCLOAK_URL=http://ubuntu-host:9090
+      - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI=http://ubuntu-host:9090/realms/sisgr-realm/protocol/openid-connect/certs
+    networks:
+      - backend-network
+
+  # ===== NGINX LOAD BALANCER FRONTEND =====
+  nginx-frontend:
+    image: nginx:latest
+    ports:
+      - "8070:80"
+    volumes:
+      - ./nginx-frontend.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - frontend1
+      - frontend2
+      - frontend3
+    networks:
+      - frontend-network
+
+  # ===== NGINX LOAD BALANCER BACKEND =====
+  nginx-backend:
+    image: nginx:latest
+    ports:
+      - "8090:8090"
+    volumes:
+      - ./nginx-backend.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - backend1
+      - backend2
+      - backend3
+    networks:
+      - backend-network
+
+networks:
+  frontend-network:
+  backend-network:

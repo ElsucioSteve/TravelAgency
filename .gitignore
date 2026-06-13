@@ -1,0 +1,45 @@
+# ===== BACKEND (Java/Maven) =====
+backend/travel-agency-backend/target/
+backend/travel-agency-backend/.idea/
+backend/travel-agency-backend/*.iml
+backend/travel-agency-backend/.mvn/
+backend/travel-agency-backend/mvnw
+backend/travel-agency-backend/mvnw.cmd
+backend/travel-agency-backend/.project
+backend/travel-agency-backend/.classpath
+backend/travel-agency-backend/.settings/
+
+# ===== FRONTEND (React/Vite) =====
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+frontend/.env.local
+frontend/npm-debug.log
+frontend/.vite/
+
+# ===== KEYCLOAK (binarios) =====
+keycloak/
+
+# ===== IDE =====
+.idea/
+.vscode/
+*.iml
+*.iws
+
+# ===== Sistema operativo =====
+.DS_Store
+Thumbs.db
+*.swp
+
+# ===== Secrets =====
+*.pem
+realm-sisgr-export.json
+travel_agency_db.sql
+*.env
+
+# ===== Coverage / Tests =====
+backend/travel-agency-backend/target/site/
+backend/travel-agency-backend/target/jacoco.exec
+
+# ===== Logs =====
+*.log
