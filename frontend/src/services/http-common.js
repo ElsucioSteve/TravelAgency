@@ -1,11 +1,8 @@
 import axios from "axios";
 import keycloak from "./keycloak";
 
-const backendServer = import.meta.env.VITE_BACKEND_SERVER || "localhost";
-const backendPort = import.meta.env.VITE_BACKEND_PORT || "8090";
-
 const httpClient = axios.create({
-  baseURL: `http://${backendServer}:${backendPort}/api/v1`,
+  baseURL: import.meta.env.VITE_API_BASE_URL || "http://localhost:8090/api/v1",
   headers: {
     "Content-type": "application/json",
   },
